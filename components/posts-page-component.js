@@ -1,6 +1,7 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
+import { formatDate } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
  console.log("Актуальный список постов:", posts);
@@ -41,7 +42,7 @@ export function renderPostsPageComponent({ appEl }) {
             ${post.description}
           </p>
           <p class="post-date">
-            ${post.createdAt}
+            ${formatDate(post.createdAt)}
           </p>
         </li>`,
    )
