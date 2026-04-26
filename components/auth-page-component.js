@@ -168,10 +168,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
   // Обработка переключения режима (вход ↔ регистрация)
   document.getElementById("toggle-button").addEventListener("click", () => {
    isLoginMode = !isLoginMode;
-   renderForm(); // Перерисовываем форму с новым режимом
+   renderForm();
   });
  };
 
- // Инициализация формы
  renderForm();
 }

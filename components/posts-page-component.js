@@ -4,13 +4,6 @@ import { posts, goToPage } from "../index.js";
 import { formatDate } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
- console.log("Актуальный список постов:", posts);
-
- /**
-  * @TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-  * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-  */
-
  if (posts.length === 0) {
   appEl.innerHTML = `
               <div class="page-container">
