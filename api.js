@@ -1,8 +1,27 @@
 const baseHost = "https://wedev-api.sky.pro/api";
-const postsHost = `${baseHost}/v1/kkk/instapro`;
+const postsHost = `${baseHost}/v1/korsak/instapro`;
 
 export function getPosts({ token }) {
  return fetch(postsHost, {
+  method: "GET",
+  headers: {
+   Authorization: token,
+  },
+ })
+  .then((response) => {
+   if (response.status === 401) {
+    throw new Error("Нет авторизации");
+   }
+
+   return response.json();
+  })
+  .then((data) => {
+   return data.posts;
+  });
+}
+
+export function getUserPosts(token, data) {
+ return fetch(postsHost + `/user-posts/${data.userId}`, {
   method: "GET",
   headers: {
    Authorization: token,
