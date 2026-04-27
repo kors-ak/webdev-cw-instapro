@@ -2,6 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { formatDate } from "../helpers.js";
+import { addLikeListeners } from "../initLikeListener.js";
 
 export function renderPostsPageComponent({ appEl }) {
  if (posts.length === 0) {
@@ -22,12 +23,12 @@ export function renderPostsPageComponent({ appEl }) {
           <div class="post-image-container">
             <img class="post-image" src="${post.imageUrl}">
           </div>
-          <div class="post-likes">
-            <button data-post-id="${post.id}" class="like-button">
+          <div class="post-likes" data-post-id="${post.id}">
+            <button class="like-button" data-is-liked="${post.isLiked}">
               <img src="./assets/images${post.isLiked ? "/like-active.svg" : "/like-not-active.svg"}">
             </button>
             <p class="post-likes-text">
-              Нравится: <strong>${post.likes.length}</strong>
+              Нравится: ${post.likes.length === 0 ? '<strong>0</strong>' : `<strong>${post.likes[0].name}</strong>`} ${post.likes.length >= 2 ? `и ещё <strong>${post.likes.length - 1}</strong>` : ''}
             </p>
           </div>
           <p class="post-text">
@@ -61,4 +62,6 @@ export function renderPostsPageComponent({ appEl }) {
  renderHeaderComponent({
   element: document.querySelector(".header-container"),
  });
+
+ addLikeListeners()
 }

@@ -59,6 +59,39 @@ export function addPost(token, description, imageUrl) {
  });
 }
 
+export function likePost(token, postId) {
+ return fetch(postsHost + `/${postId}/like`, {
+  method: "POST",
+  headers: {
+   Authorization: token,
+  },
+ }).then((response) => {
+  if (!response.ok) {
+   return response.json().then((errorData) => {
+    throw new Error(errorData.error || "Ошибка на сервере");
+   });
+  }
+  return response.json();
+ });
+}
+
+export function dislikePost(token, postId) {
+ return fetch(postsHost + `/${postId}/dislike`, {
+  method: "POST",
+  headers: {
+   Authorization: token,
+  },
+ }).then((response) => {
+  if (!response.ok) {
+   return response.json().then((errorData) => {
+    throw new Error(errorData.error || "Ошибка на сервере");
+   });
+  }
+  return response.json();
+ });
+}
+
+
 export function registerUser({ login, password, name, imageUrl }) {
  return fetch(baseHost + "/user", {
   method: "POST",
