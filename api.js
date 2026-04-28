@@ -91,7 +91,6 @@ export function dislikePost(token, postId) {
  });
 }
 
-
 export function registerUser({ login, password, name, imageUrl }) {
  return fetch(baseHost + "/user", {
   method: "POST",

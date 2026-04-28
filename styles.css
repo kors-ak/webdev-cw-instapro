@@ -38,6 +38,10 @@
  cursor: pointer;
 }
 
+.add-or-login-button {
+ cursor: pointer;
+}
+
 .posts {
  display: flex;
  flex-direction: column;

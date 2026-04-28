@@ -1,7 +1,6 @@
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage } from "../index.js";
 import { formatDate } from "../helpers.js";
-import { addLikeListeners } from "../initLikeListener.js";
 
 export function renderUserPostsPageComponent({ appEl }) {
  const allPostsHtml = posts
@@ -16,7 +15,7 @@ export function renderUserPostsPageComponent({ appEl }) {
               <img src="./assets/images${post.isLiked ? "/like-active.svg" : "/like-not-active.svg"}">
             </button>
             <p class="post-likes-text">
-              Нравится: ${post.likes.length === 0 ? '<strong>0</strong>' : `<strong>${post.likes[0].name}</strong>`} ${post.likes.length >= 2 ? `и ещё <strong>${post.likes.length - 1}</strong>` : ''}
+              Нравится: ${post.likes.length === 0 ? '<strong>0</strong>' : `<strong>${post.likes[Math.floor(Math.random() * post.likes.length)].name}</strong>`} ${post.likes.length >= 2 ? `и ещё <strong>${post.likes.length - 1}</strong>` : ''}
             </p>
           </div>
           <p class="post-text">
@@ -46,6 +45,4 @@ export function renderUserPostsPageComponent({ appEl }) {
  renderHeaderComponent({
   element: document.querySelector(".header-container"),
  });
-
- addLikeListeners()
 }

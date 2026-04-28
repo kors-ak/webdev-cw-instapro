@@ -16,6 +16,7 @@ import {
  removeUserFromLocalStorage,
  saveUserToLocalStorage,
 } from "./helpers.js";
+import { addLikeListeners } from "../initLikeListener.js";
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -62,7 +63,7 @@ export const goToPage = (newPage, data) => {
      renderApp();
     })
     .catch((error) => {
-     console.error(error);
+     console.warn(error);
      goToPage(POSTS_PAGE);
     });
   }
@@ -71,8 +72,6 @@ export const goToPage = (newPage, data) => {
    page = LOADING_PAGE;
    renderApp();
 
-   console.log("Открываю страницу пользователя: ", data.userId);
-
    return getUserPosts(getToken(), data)
     .then((userPosts) => {
      page = USER_POSTS_PAGE;
@@ -80,7 +79,7 @@ export const goToPage = (newPage, data) => {
      renderApp();
     })
     .catch((error) => {
-     console.error(error);
+     console.warn(error);
      goToPage(POSTS_PAGE);
     });
   }
@@ -121,13 +120,12 @@ export const renderApp = () => {
   return renderAddPostPageComponent({
    appEl,
    onAddPostClick({ description, imageUrl }) {
-    console.log("Добавляю пост...", { description, imageUrl });
     addPost(getToken(), description, imageUrl)
      .then(() => goToPage(POSTS_PAGE))
      .catch((error) => {
-      console.error(error.message);
+      console.warn(error.message);
       alert(
-       "Для публикации поста необходимо выбрать фотографию и добавить описание (текст длиной от 1-го символа)",
+       "Для публикации поста необходимо выбрать фотографию и добавить описание",
       );
      });
    },
@@ -135,15 +133,17 @@ export const renderApp = () => {
  }
 
  if (page === POSTS_PAGE) {
-  return renderPostsPageComponent({
+  renderPostsPageComponent({
    appEl,
   });
+  return  addLikeListeners()
  }
 
  if (page === USER_POSTS_PAGE) {
-  return renderUserPostsPageComponent({
+  renderUserPostsPageComponent({
    appEl,
   });
+  return  addLikeListeners()
  }
 };
 

@@ -12,7 +12,7 @@ export function addLikeListeners() {
 
   btn.addEventListener("click", (e) => {
    e.stopPropagation();
-
+   
    btn.disabled = true;
 
    const wasLiked = btn.dataset.isLiked === "true";
@@ -45,9 +45,9 @@ export function addLikeListeners() {
   if (likes.length === 0) {
    text += "<strong>0</strong>";
   } else if (likes.length === 1) {
-   text += `<strong>${likes[0].name}</strong>`;
+   text += `<strong>${likes[Math.floor(Math.random() * likes.length)].name}</strong>`;
   } else {
-   text += `<strong>${likes[0].name}</strong> и ещё <strong>${likes.length - 1}</strong>`;
+   text += `<strong>${likes[Math.floor(Math.random() * likes.length)].name}</strong> и ещё <strong>${likes.length - 1}</strong>`;
   }
 
   element.innerHTML = text;
