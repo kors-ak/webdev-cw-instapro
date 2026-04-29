@@ -1,6 +1,5 @@
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
-import { sanitizeHtml } from "../helpers.js";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
  const render = () => {
@@ -43,7 +42,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
  }
 
  document.getElementById("add-button").addEventListener("click", () => {
-  let text = sanitizeHtml(document.getElementById("text-input").value);
+  let text = document.getElementById("text-input").value;
 
   onAddPostClick({
    description: `${text}`,

@@ -1,5 +1,5 @@
 const baseHost = "https://wedev-api.sky.pro/api";
-const postsHost = `${baseHost}/v1/korsak/instapro`;
+const postsHost = `${baseHost}/v1/final/instapro`;
 
 export function getPosts({ token }) {
  return fetch(postsHost, {

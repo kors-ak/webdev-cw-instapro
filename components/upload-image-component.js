@@ -1,4 +1,5 @@
 import { uploadImage } from "../api.js";
+import { sanitizeHtml } from "../helpers.js";
 
 /**
  * Компонент загрузки изображения.
@@ -29,7 +30,7 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
           imageUrl
             ? `
             <div class="file-upload-image-container">
-              <img class="file-upload-image" src="${imageUrl}" alt="Загруженное изображение">
+              <img class="file-upload-image" src="${sanitizeHtml(imageUrl)}" alt="Загруженное изображение">
               <button class="file-upload-remove-button button">Заменить фото</button>
             </div>
             `

@@ -1,5 +1,6 @@
 import { likePost, dislikePost } from "./api.js";
-import { getToken, goToPage, page } from "./index.js";
+import { sanitizeHtml } from "./helpers.js";
+import { getToken } from "./index.js";
 
 export function addLikeListeners() {
  const postLikesElArr = document.querySelectorAll(".post-likes");
@@ -12,7 +13,7 @@ export function addLikeListeners() {
 
   btn.addEventListener("click", (e) => {
    e.stopPropagation();
-   
+
    btn.disabled = true;
 
    const wasLiked = btn.dataset.isLiked === "true";
@@ -45,9 +46,9 @@ export function addLikeListeners() {
   if (likes.length === 0) {
    text += "<strong>0</strong>";
   } else if (likes.length === 1) {
-   text += `<strong>${likes[Math.floor(Math.random() * likes.length)].name}</strong>`;
+   text += `<strong>${sanitizeHtml(likes[Math.floor(Math.random() * likes.length)].name)}</strong>`;
   } else {
-   text += `<strong>${likes[Math.floor(Math.random() * likes.length)].name}</strong> и ещё <strong>${likes.length - 1}</strong>`;
+   text += `<strong>${sanitizeHtml(likes[Math.floor(Math.random() * likes.length)].name)}</strong> и ещё <strong>${likes.length - 1}</strong>`;
   }
 
   element.innerHTML = text;
