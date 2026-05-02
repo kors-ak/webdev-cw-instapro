@@ -16,7 +16,7 @@ import {
  removeUserFromLocalStorage,
  saveUserToLocalStorage,
 } from "./helpers.js";
-import { addLikeListeners } from "../initLikeListener.js";
+import { addLikeListeners } from "./initLikeListener.js";
 
 export let user = getUserFromLocalStorage();
 export let page = null;
@@ -136,14 +136,14 @@ export const renderApp = () => {
   renderPostsPageComponent({
    appEl,
   });
-  return  addLikeListeners()
+  return addLikeListeners();
  }
 
  if (page === USER_POSTS_PAGE) {
   renderUserPostsPageComponent({
    appEl,
   });
-  return  addLikeListeners()
+  return addLikeListeners();
  }
 };
 
